@@ -1,0 +1,77 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&family=Permanent+Marker&family=Source+Code+Pro&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root,
+.app {
+    height: 100%;
+    width: 100%;
+    background-color: slategrey;
+    font-family: "DM Sans", sans-serif;
+    @apply text-gray-500
+
+}
+
+  
+.grid {
+  display: grid;
+  place-items: center;
+  min-height: 85%;
+}
+  
+  /* If you want the content centered horizontally and vertically */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+.input__wrapper {
+    text-align: left;
+  }
+  
+  .input__wrapper input {
+    border: 2px solid rebeccapurple;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 250px;
+    
+  }
+  .input__wrapper input:focus {
+    outline: none;
+  }
+  .input__wrapper button {
+    background-color: rebeccapurple;
+    color: white;
+    padding: 8px 15px;
+    font-size: 18px;
+    border: none;
+    border: 2px solid rebeccapurple;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    
+  }
+
+  
+  .body__item {
+    text-align: left !important;
+    border: 1px solid lightgray;
+    padding: 20px;
+    width: 500px;
+    margin: 20px auto;
+  }
+  
+  .notFound {
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid lightgray;
+    text-align: center;
+  }
