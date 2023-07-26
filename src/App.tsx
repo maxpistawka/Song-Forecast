@@ -116,7 +116,7 @@ function App() {
   async function validPlaylistCheck() {
 
     fetchWeatherData()
-
+    console.log("Fetching weather finished ")
     console.log("Search for " + playlistID)
 
     setSearching(true)
@@ -133,36 +133,43 @@ function App() {
       .then(response => response.json())
       .then(data => { return data.items })
 
+    console.log("Found" + playlistID)
 
     var arr_names: string[] = new Array(artistID.length)
     setNumSongs(artistID.length)
+
+    console.log("retrieving track ids")
+    var stringOfName = ""
     for (var i = 0; i < artistID.length; i++) {
 
       arr_names[i] = artistID[i].track.id
+      stringOfName += artistID[i].track.id + "%2C"
+      
     }
+    stringOfName  = stringOfName.slice(0, -3)
+    console.log(stringOfName)
+    console.log("done retrieving ids")
 
-    var songs = new Array(artistID.length)
+    console.log("retrieving audio features")
+    
+    const featureArray = await fetch('https://api.spotify.com/v1/audio-features?ids=' + stringOfName, artistParameters)
+    .then(response => response.json())
+    .then(data => { return data })
 
-    for (var i = 0; i < artistID.length; i++) {
 
-      songs[i] = await fetch('https://api.spotify.com/v1/audio-features/' + arr_names[i], artistParameters)
-        .then(response => response.json())
-        .then(data => { return data })
-    }
-
-    await fetchWeatherData()
+    console.log("done retrieving audio features")
     await findMagic()
 
     let result = [0, 1000]
     for (var i = 0; i < artistID.length; i++) {
-      let currSong = songs[i]
+      let currSong = featureArray.audio_features[i]
       let index = currSong.danceability + currSong.energy + currSong.loudness + currSong.speechiness +
         currSong.instrumentalness + currSong.liveness + currSong.tempo + currSong.valence
       if (Math.abs(index - magicNumber) < result[1]) {
         result = [i, Math.abs(index - magicNumber)]
       }
     }
-    let FINALSONG = songs[result[0]].id
+    let FINALSONG = featureArray.audio_features[result[0]].id
 
     var wowww = await fetch('https://api.spotify.com/v1/tracks/' + FINALSONG, artistParameters)
       .then(response => response.json())
@@ -210,10 +217,10 @@ function App() {
 
           </div>
           <div className=" input__wrapper  split">
-            <HText>Location:</HText>
+            <HText>City:</HText>
             <input
               type="text"
-              placeholder="Enter Location"
+              placeholder="Enter City"
               value={city}
               onChange={(e) => setCity(e.target.value)}
               maxLength={30}
@@ -233,8 +240,8 @@ function App() {
   <div className="wave"></div>
   <div className="wave"></div>
   <div className="wave"></div>
-<div className="wave"></div>
-<div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
   <div className="wave"></div>
   <div className="wave"></div>
   <div className="wave"></div>
@@ -258,8 +265,7 @@ function App() {
                   <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
                     Given the Current Weather in
                   </h1>
-                  
-
+        
                 </div>
                 <div>
                 <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
