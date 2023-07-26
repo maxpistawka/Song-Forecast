@@ -2,7 +2,6 @@ import Navbar from "@/scenes/navbar";
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 import OpenWeatherMap from 'openweathermap-ts';
 import { WeatherData } from "@/weather";
 import { playlistToCode, currentWeatherBuilder } from "@/shared/helpers.ts"
@@ -11,8 +10,6 @@ import WeatherIcon from '@/WeatherApi/CurrWeatherIcon.tsx'
 import Check from '@/assets/check.png'
 import Footer from "@/scenes/footer";
 import { weatherKey, idKey, secretKey } from "@/apis.ts"
-
-
 
 const openWeather = new OpenWeatherMap({
   apiKey: weatherKey
@@ -28,7 +25,7 @@ function App() {
   const [validPlaylist, setValidPlaylist] = React.useState(false);
   const [playlist, setPlaylist] = React.useState('');
   var playlistID = ""
-
+  const [numSongs, setNumSongs] = React.useState(0);
   const [validCity, setValidCity] = React.useState(false);
   const [city, setCity] = React.useState('');
   const [visible, setVisible] = useState(false);
@@ -137,7 +134,7 @@ function App() {
 
 
     var arr_names: string[] = new Array(artistID.length)
-
+    setNumSongs(artistID.length)
     for (var i = 0; i < artistID.length; i++) {
 
       arr_names[i] = artistID[i].track.id
@@ -230,37 +227,20 @@ function App() {
 
       ) : (
         <div className="grid grid-cols-1 mt-10">
-          <div className=" md:flex items-center gap-4  ">
-            <div className="grid grid-cols-1 gap-y-6 mt-16">
-              <div>
-                <h1 className="  text-gray-200 basis-3/5 font-serif  text-3xl ">
-                  Result is.....
-                </h1>
-              </div>
-              <div>
-                <h1 className="  text-gray-200 basis-3/5 font-serif  text-3xl ">
-                  {songFullName}
-                </h1>
-                <h1 className=" text-gray-200 basis-3/5  font-serif text-2xl ">
-                  {artistFullName}
-                </h1>
-              </div>
-            </div>
-            <img height={400} width={400} src={imgLink} ></img>
-          </div>
-          <div className=" md:flex items-center justify-between gap-8 mt-5">
+          <div className=" md:flex items-center justify-between gap-8 mt-16">
             <div >
               <div className=" text-center items-center">
 
                 <div>
                   <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
-                    Current Weather in:
+                    Given the Current Weather in
                   </h1>
+                  
 
                 </div>
                 <div>
-                  <h1 className=" text-white basis-3/5   font-bold  text-2xl ">
-                    {ada.name}
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
+                     {ada.name}:
                   </h1>
 
                 </div>
@@ -294,18 +274,48 @@ function App() {
                 </h1>
               </div>
               <div>
-                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl pb-48 ">
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl  ">
                   High: {ada.main.max}°C
                 </h1>
               </div>
               <div>
-                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl pb-48 ">
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
                   Humidity: {ada.main.humidity}%
                 </h1>
               </div>
             </div>
           </div>
-
+          <div className=" md:flex items-center gap-4 pt-20  pb-40">
+            <div className="grid grid-cols-1 gap-y-6 mt-5">
+              <div className= "gap-y-6 ">
+                <div >
+              <h1 className="  text-gray-200 text-center basis-3/5 font-serif  text-2xl  ">
+                  Out of {numSongs} songs searched,
+                </h1>
+                </div>
+                <div>
+                <h1 className="  text-gray-200  text-center basis-3/5 font-serif  text-2xl  ">
+                  the perfect one to be
+                </h1>
+                </div>
+                <div>
+                <h1 className="  text-gray-200 text-center basis-3/5 font-serif  text-2xl  ">
+                  listening to right now is:
+                </h1>
+                </div>
+                
+              </div>
+              <div>
+                <h1 className="  text-gray-200 text-center  basis-3/5 font-serif  text-3xl  pt-28 ">
+                  {songFullName}
+                </h1>
+                <h1 className=" text-gray-200 text-center basis-3/5  font-serif text-2xl ">
+                  by {artistFullName}
+                </h1>
+              </div>
+            </div >
+            <img height={400} width={400} src={imgLink} ></img>
+          </div>
         </div>
       )}
 
