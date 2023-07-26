@@ -21,7 +21,7 @@ const CLIENT_SECRET = secretKey
 var ada: WeatherData
 
 function App() {
-
+  const [searching, setSearching] = React.useState(false);
   const [validPlaylist, setValidPlaylist] = React.useState(false);
   const [playlist, setPlaylist] = React.useState('');
   var playlistID = ""
@@ -119,6 +119,7 @@ function App() {
 
     console.log("Search for " + playlistID)
 
+    setSearching(true)
 
     var artistParameters = {
       methos: 'GET',
@@ -185,7 +186,9 @@ function App() {
     <div className="app">
       <Navbar></Navbar>
       {!visible ? (
-        <div className="grid py-32  ">
+        <div className = "app">
+          {!searching ? (
+            <div className="grid py-32  ">
           <div className=" input__wrapper">
             <HText>Playlist Link:</HText>
             <div>
@@ -198,6 +201,7 @@ function App() {
               >
               </input>
               <button onClick={tryValidPlaylistCheck}>Submit</button>
+              
             </div>
             {validPlaylist && (
               <img src={Check} ></img>
@@ -220,13 +224,32 @@ function App() {
             )
             }
 
+          </div> 
           </div>
+          ) : (
+            <div className="center">
+  <div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+<div className="wave"></div>
+<div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+  <div className="wave"></div>
+
+</div>
+          )}
 
         </div>
 
 
       ) : (
+        
         <div className="grid grid-cols-1 mt-10">
+          
           <div className=" md:flex items-center justify-between gap-8 mt-16">
             <div >
               <div className=" text-center items-center">
