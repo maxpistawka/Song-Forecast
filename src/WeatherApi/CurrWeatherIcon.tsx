@@ -1,35 +1,28 @@
+
 import React from 'react';
-import { ReactComponent as CloudyIcon } from '@/assets/cloudy.svg';
-import { ReactComponent as HazeIcon } from '@/assets/haze.svg';
-import { ReactComponent as HeavyRainIcon } from '@/assets/heavy-rain.svg';
-import { ReactComponent as PartlyCloudyIcon } from '@/assets/partly-cloudy.svg';
-import { ReactComponent as RainIcon } from '@/assets/rain.svg';
-import { ReactComponent as SleetIcon } from '@/assets/sleet.svg';
-import { ReactComponent as SnowIcon } from '@/assets/snow.svg';
-import { ReactComponent as SunnyIcon } from '@/assets/sunny.svg';
-import { ReactComponent as ThunderstormIcon } from '@/assets/thunderstorm.svg';
 
 interface IWeatherIconProps {
   code: number;
 }
 
 const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
-  let Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-
+  console.log(children.code)
   switch (children.code) {
+    
     // Clear
     case 800:
-      Icon = SunnyIcon;
-      break;
+
+      console.log(children.code)
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#FF9800" d="M38,38c0,0-9-3-14-3s-14,3-14,3s3-10,3-14s-3-14-3-14s9,3,14,3s14-3,14-3s-3,10-3,14S38,38,38,38z"/><path fill="#FF9800" d="M43,24c0,0-8.222,4.778-11.222,7.778S24,43,24,43s-4.278-7.722-7.778-11.222S5,24,5,24s8.221-4.777,11.222-7.777S24,5,24,5s4.779,8.223,7.778,11.223S43,24,43,24z"/><path fill="#FFEB3B" d="M14,24c0,5.524,4.477,10,10,10s10-4.476,10-10s-4.477-10-10-10S14,18.476,14,24"/></svg>;
 
     // Cloud
     case 801:
     case 802:
-      Icon = PartlyCloudyIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#FF9800" d="M8 10.001H25V27.000999999999998H8z"/><path fill="#FF9800" d="M7.661 9.661H25.339V27.339H7.661z" transform="rotate(-45.001 16.5 18.5)"/><path fill="#FFEB3B" d="M10,18.5c0,3.591,2.909,6.5,6.5,6.5s6.5-2.909,6.5-6.5S20.091,12,16.5,12S10,14.909,10,18.5"/><g><path fill="#BBDEFB" d="M29.5 17A8.5 8.5 0 1 0 29.5 34A8.5 8.5 0 1 0 29.5 17Z"/><path fill="#BBDEFB" d="M37 26.893A7 7 0 1 0 37 40.893 7 7 0 1 0 37 26.893zM11 27A7 7 0 1 0 11 41 7 7 0 1 0 11 27z"/><path fill="#BBDEFB" d="M17.5 20A6.5 6.5 0 1 0 17.5 33A6.5 6.5 0 1 0 17.5 20Z"/><path fill="#BBDEFB" d="M25 24.893A7 7 0 1 0 25 38.893A7 7 0 1 0 25 24.893Z"/><path fill="#BBDEFB" d="M7,37c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V37z"/></g></svg>  
       break;
     case 803:
     case 804:
-      Icon = CloudyIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 12A8.5 8.5 0 1 0 29.5 29A8.5 8.5 0 1 0 29.5 12Z"/><path fill="#BBDEFB" d="M37 21.893A7 7 0 1 0 37 35.893 7 7 0 1 0 37 21.893zM11 22A7 7 0 1 0 11 36 7 7 0 1 0 11 22z"/><path fill="#BBDEFB" d="M17.5 15A6.5 6.5 0 1 0 17.5 28A6.5 6.5 0 1 0 17.5 15Z"/><path fill="#BBDEFB" d="M25 19.893A7 7 0 1 0 25 33.893A7 7 0 1 0 25 19.893Z"/><path fill="#BBDEFB" d="M7,32c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V32z"/></svg>
       break;
 
     // Rain
@@ -38,14 +31,14 @@ const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
     case 520:
     case 521:
     case 511:
-      Icon = RainIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 5A8.5 8.5 0 1 0 29.5 22A8.5 8.5 0 1 0 29.5 5Z"/><path fill="#BBDEFB" d="M37 14.893A7 7 0 1 0 37 28.893 7 7 0 1 0 37 14.893zM11 15A7 7 0 1 0 11 29 7 7 0 1 0 11 15z"/><path fill="#BBDEFB" d="M17.5 8A6.5 6.5 0 1 0 17.5 21A6.5 6.5 0 1 0 17.5 8Z"/><path fill="#BBDEFB" d="M25 12.893A7 7 0 1 0 25 26.893A7 7 0 1 0 25 12.893Z"/><path fill="#BBDEFB" d="M7,25c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V25z"/><g><path fill="#2196F3" d="M34.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.134-1.131-1.133-2.969 0-4.1C31.982 31.917 37 31 37 31S36.082 36.02 34.95 37.15zM23.95 41.15c-1.132 1.132-2.968 1.132-4.101 0-1.133-1.133-1.132-2.969 0-4.101 1.133-1.133 6.152-2.05 6.152-2.05S25.082 40.02 23.95 41.15zM13.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.133-1.131-1.132-2.969 0-4.1 1.132-1.133 6.151-2.05 6.151-2.05S15.082 36.02 13.95 37.15z"/></g></svg>
       break;
     case 502:
     case 503:
     case 504:
     case 522:
     case 531:
-      Icon = HeavyRainIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 5A8.5 8.5 0 1 0 29.5 22A8.5 8.5 0 1 0 29.5 5Z"/><path fill="#BBDEFB" d="M37 14.893A7 7 0 1 0 37 28.893 7 7 0 1 0 37 14.893zM11 15A7 7 0 1 0 11 29 7 7 0 1 0 11 15z"/><path fill="#BBDEFB" d="M17.5 8A6.5 6.5 0 1 0 17.5 21A6.5 6.5 0 1 0 17.5 8Z"/><path fill="#BBDEFB" d="M25 12.893A7 7 0 1 0 25 26.893A7 7 0 1 0 25 12.893Z"/><path fill="#BBDEFB" d="M7,25c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V25z"/><g><path fill="#2196F3" d="M20 29A1 1 0 1 0 20 31 1 1 0 1 0 20 29zM34 29A1 1 0 1 0 34 31 1 1 0 1 0 34 29zM19 32A1 1 0 1 0 19 34 1 1 0 1 0 19 32zM18 35A1 1 0 1 0 18 37 1 1 0 1 0 18 35zM17 38A1 1 0 1 0 17 40 1 1 0 1 0 17 38zM33 32A1 1 0 1 0 33 34 1 1 0 1 0 33 32zM32 35A1 1 0 1 0 32 37 1 1 0 1 0 32 35zM31 38A1 1 0 1 0 31 40 1 1 0 1 0 31 38zM16 41A1 1 0 1 0 16 43 1 1 0 1 0 16 41zM30 41A1 1 0 1 0 30 43 1 1 0 1 0 30 41zM12 32A1 1 0 1 0 12 34 1 1 0 1 0 12 32zM11 35A1 1 0 1 0 11 37 1 1 0 1 0 11 35zM26 32A1 1 0 1 0 26 34 1 1 0 1 0 26 32zM25 35A1 1 0 1 0 25 37 1 1 0 1 0 25 35zM10 38A1 1 0 1 0 10 40 1 1 0 1 0 10 38zM24 38A1 1 0 1 0 24 40 1 1 0 1 0 24 38zM27 29A1 1 0 1 0 27 31 1 1 0 1 0 27 29zM13 29A1 1 0 1 0 13 31 1 1 0 1 0 13 29z"/></g></svg>;
       break;
 
     // Drizzle
@@ -58,7 +51,7 @@ const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
     case 313:
     case 314:
     case 321:
-      Icon = RainIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 5A8.5 8.5 0 1 0 29.5 22A8.5 8.5 0 1 0 29.5 5Z"/><path fill="#BBDEFB" d="M37 14.893A7 7 0 1 0 37 28.893 7 7 0 1 0 37 14.893zM11 15A7 7 0 1 0 11 29 7 7 0 1 0 11 15z"/><path fill="#BBDEFB" d="M17.5 8A6.5 6.5 0 1 0 17.5 21A6.5 6.5 0 1 0 17.5 8Z"/><path fill="#BBDEFB" d="M25 12.893A7 7 0 1 0 25 26.893A7 7 0 1 0 25 12.893Z"/><path fill="#BBDEFB" d="M7,25c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V25z"/><g><path fill="#2196F3" d="M34.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.134-1.131-1.133-2.969 0-4.1C31.982 31.917 37 31 37 31S36.082 36.02 34.95 37.15zM23.95 41.15c-1.132 1.132-2.968 1.132-4.101 0-1.133-1.133-1.132-2.969 0-4.101 1.133-1.133 6.152-2.05 6.152-2.05S25.082 40.02 23.95 41.15zM13.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.133-1.131-1.132-2.969 0-4.1 1.132-1.133 6.151-2.05 6.151-2.05S15.082 36.02 13.95 37.15z"/></g></svg>
       break;
 
     // Thunderstorm
@@ -72,7 +65,7 @@ const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
     case 230:
     case 231:
     case 232:
-      Icon = ThunderstormIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M18.5 4A8.5 8.5 0 1 0 18.5 21A8.5 8.5 0 1 0 18.5 4Z"/><path fill="#BBDEFB" d="M19 20A7 7 0 1 0 19 34A7 7 0 1 0 19 20Z"/><path fill="#BBDEFB" d="M11 14A7 7 0 1 0 11 28 7 7 0 1 0 11 14zM38 14A6 6 0 1 0 38 26 6 6 0 1 0 38 14z"/><path fill="#BBDEFB" d="M30 19A6 6 0 1 0 30 31A6 6 0 1 0 30 19Z"/><path fill="#BBDEFB" d="M30.5 7A6.5 6.5 0 1 0 30.5 20A6.5 6.5 0 1 0 30.5 7Z"/><path fill="#BBDEFB" d="M23 12A7 7 0 1 0 23 26A7 7 0 1 0 23 12Z"/><g><path fill="#D500F9" d="M22 44l2-7h-3l4-8h4l-3.594 6H29L22 44zM32.594 39l2-7h-3l4-8h4L36 30h3.594L32.594 39z"/></g></svg> 
       break;
 
     // Snow
@@ -86,10 +79,10 @@ const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
     case 620:
     case 621:
     case 622:
-      Icon = SnowIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 5A8.5 8.5 0 1 0 29.5 22A8.5 8.5 0 1 0 29.5 5Z"/><path fill="#BBDEFB" d="M37 14.893A7 7 0 1 0 37 28.893 7 7 0 1 0 37 14.893zM11 15A7 7 0 1 0 11 29 7 7 0 1 0 11 15z"/><path fill="#BBDEFB" d="M17.5 8A6.5 6.5 0 1 0 17.5 21A6.5 6.5 0 1 0 17.5 8Z"/><path fill="#BBDEFB" d="M25 12.893A7 7 0 1 0 25 26.893A7 7 0 1 0 25 12.893Z"/><path fill="#BBDEFB" d="M7,25c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V25z"/><g><path fill="#2196F3" d="M23 34H25V43H23z"/><path fill="#2196F3" d="M23 33.999H25V42.999H23z" transform="rotate(120.471 24 38.499)"/><path fill="#2196F3" d="M23.001 34H24.999000000000002V43H23.001z" transform="rotate(60.679 24 38.5)"/><path fill="#2196F3" d="M10 31H12V40H10z"/><path fill="#2196F3" d="M10 30.999H12V39.998999999999995H10z" transform="rotate(120.444 11 35.5)"/><path fill="#2196F3" d="M10.001 31H11.998999999999999V40H10.001z" transform="rotate(60.679 11 35.5)"/><path fill="#2196F3" d="M36 31H38V40H36z"/><path fill="#2196F3" d="M35.999 30.998H37.999V39.998000000000005H35.999z" transform="rotate(120.458 36.999 35.5)"/><path fill="#2196F3" d="M36 31H37.998V40.001H36z" transform="rotate(60.679 36.999 35.5)"/></g></svg>
       break;
     case 611:
-      Icon = SleetIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#BBDEFB" d="M29.5 5A8.5 8.5 0 1 0 29.5 22A8.5 8.5 0 1 0 29.5 5Z"/><path fill="#BBDEFB" d="M37 14.893A7 7 0 1 0 37 28.893 7 7 0 1 0 37 14.893zM11 15A7 7 0 1 0 11 29 7 7 0 1 0 11 15z"/><path fill="#BBDEFB" d="M17.5 8A6.5 6.5 0 1 0 17.5 21A6.5 6.5 0 1 0 17.5 8Z"/><path fill="#BBDEFB" d="M25 12.893A7 7 0 1 0 25 26.893A7 7 0 1 0 25 12.893Z"/><path fill="#BBDEFB" d="M7,25c0,2.209,1.791,4,4,4h25c2.209,0,4-1.791,4-4v-1c0-2.209-1.791-4-4-4H11c-2.209,0-4,1.791-4,4V25z"/><g><path fill="#2196F3" d="M35.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.134-1.131-1.133-2.969 0-4.1C32.982 31.917 38 31 38 31S37.082 36.02 35.95 37.15zM14.95 37.15c-1.132 1.133-2.968 1.133-4.101 0-1.133-1.131-1.132-2.969 0-4.1 1.132-1.133 6.151-2.05 6.151-2.05S16.082 36.02 14.95 37.15zM23 34H25V43H23z"/><path fill="#2196F3" d="M23 33.999H25V42.999H23z" transform="rotate(120.471 24 38.499)"/><path fill="#2196F3" d="M23.001 34H24.999000000000002V43H23.001z" transform="rotate(60.679 24 38.5)"/></g></svg>
       break;
 
     // Atmosphere
@@ -103,13 +96,13 @@ const WeatherIcon: React.FC<IWeatherIconProps> = (children) => {
     case 762:
     case 771:
     case 781:
-      Icon = HazeIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#FF9800" d="M24,6L6,24l1,1h1c1.104,0,2,0.896,2,2c0,0.293-0.066,0.569-0.18,0.82L23,41h2l17-17L24,6z"/><path fill="#FF9800" d="M11 11H37V37H11z"/><path fill="#FFEB3B" d="M13,24c0,6.077,4.923,11,11,11c6.076,0,11-4.923,11-11s-4.924-11-11-11C17.923,13,13,17.923,13,24"/><path fill="#64B5F6" d="M40,37h-9c-1.104,0-2-0.896-2-2s0.896-2,2-2h3c1.104,0,2-0.896,2-2s-0.896-2-2-2h-6h-3h-6c-1.104,0-2-0.896-2-2c0-1.102,0.89-1.994,1.99-1.999H21c1.104,0,2-0.896,2-2V23l0,0c0-1.104-0.896-2-2-2H7v0.001c-1.104,0-2,0.896-2,2s0.896,2,2,2h1C9.1,25.006,9.99,25.898,9.99,27c0,1.104-0.896,2-2,2H8c-1.104,0-2,0.896-2,2s0.896,2,2,2h1c1.104,0,2,0.896,2,2s-0.896,2-2,2s-2,0.896-2,2s0.896,2,2,2h31c0.8,0,1.485-0.473,1.805-1.152h0.001l0.001-0.002c0.057-0.123,0.104-0.25,0.135-0.385c0.002-0.008,0.006-0.016,0.008-0.023C41.98,39.296,42,39.15,42,39C42,37.896,41.104,37,40,37z"/><path fill="#BBDEFB" d="M24,35c4.273,0,7.969-2.44,9.79-6H28h-3h-6c-1.104,0-2-0.896-2-2c0-1.102,0.89-1.994,1.99-1.999H21c1.104,0,2-0.896,2-2V23c0-1.104-0.896-2-2-2h-7.576C13.154,21.955,13,22.959,13,24C13,30.077,17.923,35,24,35z"/></svg>
       break;
 
     default:
-      Icon = SunnyIcon;
+      return <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><path fill="#FF9800" d="M38,38c0,0-9-3-14-3s-14,3-14,3s3-10,3-14s-3-14-3-14s9,3,14,3s14-3,14-3s-3,10-3,14S38,38,38,38z"/><path fill="#FF9800" d="M43,24c0,0-8.222,4.778-11.222,7.778S24,43,24,43s-4.278-7.722-7.778-11.222S5,24,5,24s8.221-4.777,11.222-7.777S24,5,24,5s4.779,8.223,7.778,11.223S43,24,43,24z"/><path fill="#FFEB3B" d="M14,24c0,5.524,4.477,10,10,10s10-4.476,10-10s-4.477-10-10-10S14,18.476,14,24"/></svg>
   }
-  return <Icon style={{ width: '200px', height: '200px' }} />;
+
 };
 
 export default WeatherIcon;

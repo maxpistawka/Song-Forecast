@@ -9,7 +9,7 @@ import HText from '@/shared/HText';
 import WeatherIcon from '@/WeatherApi/CurrWeatherIcon.tsx'
 import Check from '@/assets/check.png'
 import Footer from "@/scenes/footer";
-import {weatherKey, idKey, secretKey} from "@/apis.ts"
+import { weatherKey, idKey, secretKey } from "@/apis.ts"
 
 
 
@@ -23,7 +23,7 @@ const CLIENT_SECRET = secretKey
 var ada: WeatherData
 
 function App() {
- 
+
   const [validPlaylist, setValidPlaylist] = React.useState(false);
   const [playlist, setPlaylist] = React.useState('');
   var playlistID = ""
@@ -138,14 +138,14 @@ function App() {
     var arr_names: string[] = new Array(artistID.length)
 
     for (var i = 0; i < artistID.length; i++) {
-      2
+
       arr_names[i] = artistID[i].track.id
     }
 
     var songs: AudioFeatures[] = new Array(artistID.length)
 
     for (var i = 0; i < artistID.length; i++) {
-      2
+
       songs[i] = await fetch('https://api.spotify.com/v1/audio-features/' + arr_names[i], artistParameters)
         .then(response => response.json())
         .then(data => { return data })
@@ -184,16 +184,13 @@ function App() {
 
 
   return (
-    <div className="  app">
+    <div className="app">
       <Navbar></Navbar>
       {!visible ? (
-          
-            <div className="grid py-32  ">
-             
-            <div className=" input__wrapper">
-              
-              <HText>Playlist Link:</HText>
-              <div>
+        <div className="grid py-32  ">
+          <div className=" input__wrapper">
+            <HText>Playlist Link:</HText>
+            <div>
               <input
                 type="text"
                 placeholder="Enter Link"
@@ -203,89 +200,123 @@ function App() {
               >
               </input>
               <button onClick={tryValidPlaylistCheck}>Submit</button>
-              </div>
-              {validPlaylist && (
-                <img src={Check} ></img>
-              )
-              }
-              
             </div>
-            <div className=" input__wrapper  split">
-              <HText>Location:</HText>
-              <input
-                type="text"
-                placeholder="Enter Location"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                maxLength={30}
-              ></input>
-              <button onClick={verifyWeatherData}>Submit</button>
-              {validCity && (
-                <img src={Check} ></img>
-              )
-              }
-             
-            </div>
-           
+            {validPlaylist && (
+              <img src={Check} ></img>
+            )
+            }
+
           </div>
-      
-          
-            ) : (
-              <div className="grid grid-cols-1 mt-10">
-                <div className=" md:flex items-center gap-4  ">
-                  <div className = "grid grid-cols-1  mt-16">
-                    <h1 className="  text-gray-200 basis-3/5 font-serif  text-3xl ">
-                      {songFullName}
-                    </h1>
-                    <h1 className=" text-gray-200 basis-3/5  font-serif text-2xl ">
-                      {artistFullName}
-                    </h1>
-                  </div>
-                  <img height={400} width={400} src={imgLink} ></img>
+          <div className=" input__wrapper  split">
+            <HText>Location:</HText>
+            <input
+              type="text"
+              placeholder="Enter Location"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              maxLength={30}
+            ></input>
+            <button onClick={verifyWeatherData}>Submit</button>
+            {validCity && (
+              <img src={Check} ></img>
+            )
+            }
+
+          </div>
+
+        </div>
+
+
+      ) : (
+        <div className="grid grid-cols-1 mt-10">
+          <div className=" md:flex items-center gap-4  ">
+            <div className="grid grid-cols-1 gap-y-6 mt-16">
+              <div>
+                <h1 className="  text-gray-200 basis-3/5 font-serif  text-3xl ">
+                  Result is.....
+                </h1>
+              </div>
+              <div>
+                <h1 className="  text-gray-200 basis-3/5 font-serif  text-3xl ">
+                  {songFullName}
+                </h1>
+                <h1 className=" text-gray-200 basis-3/5  font-serif text-2xl ">
+                  {artistFullName}
+                </h1>
+              </div>
+            </div>
+            <img height={400} width={400} src={imgLink} ></img>
+          </div>
+          <div className=" md:flex items-center justify-between gap-8 mt-5">
+            <div >
+              <div className=" text-center items-center">
+
+                <div>
+                  <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
+                    Current Weather in:
+                  </h1>
+
                 </div>
-                <div className=" md:flex items-center justify-between gap-8 mt-5">
-                  <div >
-                    <div>
-                    <HText>Current Weather in:</HText>
-                    </div>
-                    <div>
-                    <HText>{ada.name}</HText>
-                    </div>
-                    <div className="md:flex items-center justify-between gap-8 mt-5">
-                      <WeatherIcon code={ada.weather.id} ></WeatherIcon>
-                      <HText>{ada.main.temp}° C</HText>
-                    </div>
-                    <div className="mt-5">
-                      <HText>{ada.weather.description}</HText>
-                    </div>
-                  </div>
-                  <div className="grid-cols-1 space-y-4 ">
-                    <div>
-                      <HText>Feels Like: {ada.main.feels_like}° C</HText>
-                    </div>
-                    <div>
-                      <HText>High: {ada.main.max}° C</HText>
-                    </div>
-                    <div>
-                      <HText>Low: {ada.main.min}° C</HText>
-                    </div>
-                    <div>
-                      <HText>Humidity: {ada.main.humidity} %</HText>
-                    </div>
-                  </div>
+                <div>
+                  <h1 className=" text-white basis-3/5   font-bold  text-2xl ">
+                    {ada.name}
+                  </h1>
+
                 </div>
               </div>
-            ) }
-          
-         
-          
-          
-            
-        
-        <Footer></Footer>
+              <div className=" text-center ">
+                <div className="flex items-center justify-between gap-8 mt-2">
+                  <WeatherIcon code = {ada.weather.id}></WeatherIcon>
+                  <h1 className=" text-gray-200 basis-3/5  font-serif text-2xl ">
+                    {ada.main.temp}° C
+                  </h1>
+
+                </div>
+                <div className="mt-2">
+                  <h1 className=" text-gray-200 basis-3/5  font-serif text-2xl ">
+                    {ada.weather.description}
+                  </h1>
+
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 mt-3 gap-y-2 ">
+
+              <div>
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
+                  Feels Like: {ada.main.feels_like}°C
+                </h1>
+              </div>
+              <div>
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl ">
+                  Low: {ada.main.min}°C
+                </h1>
+              </div>
+              <div>
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl pb-48 ">
+                  High: {ada.main.max}°C
+                </h1>
+              </div>
+              <div>
+                <h1 className=" text-gray-300 basis-3/5  font-serif text-2xl pb-48 ">
+                  Humidity: {ada.main.humidity}%
+                </h1>
+              </div>
+            </div>
+          </div>
+
         </div>
-      
-    
+      )}
+
+
+
+
+
+
+      <Footer></Footer>
+    </div>
+
+
   )
 }
 

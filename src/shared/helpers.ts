@@ -1,6 +1,6 @@
 
 export function toCelsius(temp: number) {
-    return Math.round((temp - 32) * 500 / 9) / 100
+    return Math.round((temp - 32) * 50 / 9) / 10
 }
 export function capitalizeFirsts(word: string) {
     const words = word.split(" ");
