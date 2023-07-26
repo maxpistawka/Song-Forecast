@@ -1,7 +1,8 @@
 import Navbar from "@/scenes/navbar";
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { AudioFeatures } from "@spotify/web-api-ts-sdk";
+
+
 import OpenWeatherMap from 'openweathermap-ts';
 import { WeatherData } from "@/weather";
 import { playlistToCode, currentWeatherBuilder } from "@/shared/helpers.ts"
@@ -142,7 +143,7 @@ function App() {
       arr_names[i] = artistID[i].track.id
     }
 
-    var songs: AudioFeatures[] = new Array(artistID.length)
+    var songs = new Array(artistID.length)
 
     for (var i = 0; i < artistID.length; i++) {
 
