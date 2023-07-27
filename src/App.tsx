@@ -181,10 +181,8 @@ function App() {
     console.log("done retrieving audio features")
     await findMagic()
 
-    let result = [0, 1000]
 
-
-    
+  
     let FINALSONG = songCalculator(ada.weather.id, ada.main.feels_like, featureArray)
     console.log(FINALSONG)
     
