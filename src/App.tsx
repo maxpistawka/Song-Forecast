@@ -10,6 +10,7 @@ import WeatherIcon from '@/WeatherApi/CurrWeatherIcon.tsx'
 import Check from '@/assets/check.png'
 import Footer from "@/scenes/footer";
 import { weatherKey, idKey, secretKey } from "@/apis.ts"
+import { songCalculator } from "./WeatherApi/SongCalculator";
 
 const openWeather = new OpenWeatherMap({
   apiKey: weatherKey
@@ -129,47 +130,68 @@ function App() {
 
       }
     }
-    var artistID = await fetch('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks?limit=50', artistParameters)
+    var wowwwww = await fetch('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks?limit=50', artistParameters)
       .then(response => response.json())
-      .then(data => { return data.items })
+      .then(data => { return data })
 
+    console.log(wowwwww)
+
+    let artistID = wowwwww.items
+    
+    while (wowwwww.next != null) {
+      wowwwww = await fetch(wowwwww.next, artistParameters)
+      .then(response => response.json())
+      .then(data => { return data })
+      artistID = artistID.concat(wowwwww.items)
+    }
+
+    console.log(artistID)
     console.log("Found" + playlistID)
-
-    var arr_names: string[] = new Array(artistID.length)
-    setNumSongs(artistID.length)
 
     console.log("retrieving track ids")
     var stringOfName = ""
+    let arrOfStrings = []
     for (var i = 0; i < artistID.length; i++) {
-
-      arr_names[i] = artistID[i].track.id
+      if (i % 98 == 0) {
+        stringOfName  = stringOfName.slice(0, -3)
+        arrOfStrings.push(stringOfName)
+        stringOfName = ""
+      }
       stringOfName += artistID[i].track.id + "%2C"
-      
     }
-    stringOfName  = stringOfName.slice(0, -3)
+    if (stringOfName.length > 4){
+      stringOfName  = stringOfName.slice(0, -3)
+      arrOfStrings.push(stringOfName)
+    }
+
     console.log(stringOfName)
     console.log("done retrieving ids")
 
     console.log("retrieving audio features")
-    
-    const featureArray = await fetch('https://api.spotify.com/v1/audio-features?ids=' + stringOfName, artistParameters)
-    .then(response => response.json())
-    .then(data => { return data })
-
+    let featureArray = await fetch('https://api.spotify.com/v1/audio-features?ids=' + arrOfStrings[1], artistParameters)
+    .then(response => response.json()
+    .then(data => { return data.audio_features }))
+    console.log(featureArray.audio_features)
+    for(var i = 2; i < arrOfStrings.length; i++) {
+      featureArray = featureArray.concat(await fetch('https://api.spotify.com/v1/audio-features?ids=' + arrOfStrings[i], artistParameters)
+      .then(response => response.json())
+      .then(data => { return data.audio_features }))
+    }
 
     console.log("done retrieving audio features")
     await findMagic()
 
     let result = [0, 1000]
-    for (var i = 0; i < artistID.length; i++) {
-      let currSong = featureArray.audio_features[i]
-      let index = currSong.danceability + currSong.energy + currSong.loudness + currSong.speechiness +
-        currSong.instrumentalness + currSong.liveness + currSong.tempo + currSong.valence
-      if (Math.abs(index - magicNumber) < result[1]) {
-        result = [i, Math.abs(index - magicNumber)]
-      }
-    }
-    let FINALSONG = featureArray.audio_features[result[0]].id
+
+
+    
+    let FINALSONG = songCalculator(ada.weather.id, ada.main.feels_like, featureArray)
+    console.log(FINALSONG)
+    
+
+    setNumSongs(artistID.length)
+    
+    ////let FINALSONG = featureArray[result[0]].id
 
     var wowww = await fetch('https://api.spotify.com/v1/tracks/' + FINALSONG, artistParameters)
       .then(response => response.json())
