@@ -30,15 +30,11 @@ function App() {
   const [validCity, setValidCity] = React.useState(false);
   const [city, setCity] = React.useState('');
   const [visible, setVisible] = useState(false);
-
   const [accessToken, setAccessToken] = useState('');
-
   const [songFullName, setSongFullName] = React.useState('');
   const [artistFullName, setArtistFullName] = React.useState('');
 
   const [imgLink, setImgLink] = React.useState('https://cdn.discordapp.com/attachments/325762404879433738/1132476182672191649/image.png');
-
-  var magicNumber = 100;
 
 
   useEffect(() => {
@@ -85,11 +81,6 @@ function App() {
 
 
 
-  async function findMagic() {
-    magicNumber = Math.abs(ada.main.temp - 50) * 5 / 9 * 15
-    console.log("magic num: " + String(magicNumber))
-
-  };
 
   async function tryValidPlaylistCheck() {
     playlistID = playlistToCode(playlist)!
@@ -101,7 +92,8 @@ function App() {
         'Authorization': 'Bearer ' + accessToken,
       }
     }
-    const response = await fetch('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks?limit=50', artistParameters)
+
+    const response = await fetch('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks?limit=1', artistParameters)
     console.log(response.ok)
     if (response.ok) {
       setValidPlaylist(true);
@@ -115,11 +107,9 @@ function App() {
   }
 
   async function validPlaylistCheck() {
-
     fetchWeatherData()
     console.log("Fetching weather finished ")
     console.log("Search for " + playlistID)
-
     setSearching(true)
 
     var artistParameters = {
@@ -179,7 +169,6 @@ function App() {
     }
 
     console.log("done retrieving audio features")
-    await findMagic()
 
 
   
